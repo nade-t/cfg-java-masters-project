@@ -87,13 +87,13 @@ Create your MySQL database and table using the .sql script included in the proje
 ```mermaid
 flowchart TD
 User -->|sends GET request| /books
-/packages -->|mapped by| Controller
+/books -->|mapped by| Controller
 Controller -->|calls| Repository
 Repository -->|queries| DB
 DB -->|returns data| Repository
 Repository --> Controller
 Controller -->|builds response| /books
-/packages -->|returns to| User
+/books -->|returns to| User
 ```
 
 
