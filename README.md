@@ -20,11 +20,11 @@ This project manages a bookstore's inventory and transactions, including purchas
 ## Software Requirements
 To run this project you will need:
 
-- Java 21 or higher, Spring Boot
-- IDE (IntelliJ IDEA)
-- MySQL database integration with JPA
-- RESTful API with OpenAPI documentation
-- Unit testing using JUnit and Mockito
+- **Java 21 or higher, Spring Boot**
+- **IDE (IntelliJ IDEA)**
+- **MySQL database integration with JPA**
+- **RESTful API with OpenAPI documentation**
+- **Unit testing using JUnit and Mockito**
 
 ------
 
@@ -44,24 +44,25 @@ cd cfg-java-masters-project
 
 ## Configuration
 
-The app is configured using application.yml:
+The app is configured using application.yml
 
-Locate the application.yml.example in the resources directory. 
-Replace credentials with your own username and MySQL password
+1. Locate the `application.yml.example` in the resources directory. 
+2. Replace credentials with your own username and MySQL password
 
 
 ## Database Setup
 
 Create your MySQL database and table using the .sql script included in the project:
-Location: src/main/resources/ADD IN SQL DATABASE!
+
+- Location: `src/main/resources/ADD IN SQL DATABASE!`
 
 
 ## Run the Application
 
-Make sure MySQL is running
-Create the database using the .sql file
-Update application.yml with DB credentials
-Run the application: in IntelliJ run the main class
+1. Make sure MySQL is running
+2. Create the database using the .sql file
+3. Update application.yml with DB credentials
+4. Run the application: in IntelliJ run the main class
 
 ------
 
@@ -98,7 +99,7 @@ For full documentation visit: ( **add link to swagger ui!** )
 ------
 
 ### Authors
-Violeta - 
-Nade -
-Jessie - 
-Radhika - 
+- Violeta  
+- Nade 
+- Jessie  
+- Radhika  
