@@ -21,7 +21,7 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
-        log.info("A new book has been added to the bookstore.");
+        log.info("Adding new book: {}", book);
         return ResponseEntity.ok(bookService.addbook(book));
     }
 }
