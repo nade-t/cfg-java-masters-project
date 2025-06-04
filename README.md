@@ -54,7 +54,7 @@ The app is configured using application.yml
 
 Create your MySQL database and table using the .sql script included in the project:
 
-- Location: `src/main/resources/ADD IN SQL DATABASE!`
+- Location: `src/main/resources/database.sql`
 
 
 ## Run the Application
