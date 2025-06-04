@@ -6,11 +6,10 @@ import com.cfgmasters.project.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -23,5 +22,18 @@ public class BookController {
     public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
         log.info("Adding new book: {}", book);
         return ResponseEntity.ok(bookService.addbook(book));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Book>> getAllBooks() {
+        log.info("Fetching all books");
+        List<Book> books = bookService.getAllBooks();
+
+        // Logs warning if list is empty
+        if (books.isEmpty()) {
+            log.warn("No books found!");
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(books);
     }
 }
