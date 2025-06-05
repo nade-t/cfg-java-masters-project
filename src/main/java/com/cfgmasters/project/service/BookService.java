@@ -5,6 +5,7 @@ import com.cfgmasters.project.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -21,5 +22,9 @@ public class BookService {
             log.error(e.getMessage());
             throw e;
         }
+    }
+
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
     }
 }
