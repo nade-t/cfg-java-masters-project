@@ -28,12 +28,6 @@ public class BookController {
     public ResponseEntity<List<Book>> getAllBooks() {
         log.info("Fetching all books");
         List<Book> books = bookService.getAllBooks();
-
-        // Logs warning if list is empty
-        if (books.isEmpty()) {
-            log.warn("No books found!");
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok(books);
     }
 }
