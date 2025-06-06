@@ -1,19 +1,21 @@
 package com.cfgmasters.project.controller;
 
 import com.cfgmasters.project.model.Book;
-import com.cfgmasters.project.repository.BookRepository;
 import com.cfgmasters.project.service.BookService;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import java.math.BigDecimal;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -39,14 +41,21 @@ class BookControllerTest {
                 """;
         val request = post("/books").content(rawRequest).contentType(String.valueOf(MediaType.APPLICATION_JSON));
 
-        //fix price issue double cannot be converted to bigDecimal
-        val mockBook = new Book(1L, "The Psychology of Money", "Morgan Housel", 10.99, 8);
+        val mockBook = new Book(1L, "The Psychology of Money", "Morgan Housel", BigDecimal.valueOf((10.99)), 8);
         when(bookService.addbook(any(Book.class))).thenReturn(mockBook);
+
         mvc.perform(request).andExpect(status().isOk());
     }
 
+    //Checking if mock service returns list of books
     @Test
-    void whenGetAllBooks_thenReturnsListOfBooks() {
+    void whenGetAllBooks_thenReturnsListOfBooks() throws Exception {
+        List<Book> mockBooks = List.of(
+                new Book(1L, "Book One", "Test Author", BigDecimal.valueOf(12.99), 6),
+                new Book(1L, "Book One", "Test Author", BigDecimal.valueOf(12.99), 6)
+        );
+        when(bookService.getAllBooks()).thenReturn(mockBooks);
 
+        mvc.perform(get("/books")).andExpect(status().isOk());
     }
 }
