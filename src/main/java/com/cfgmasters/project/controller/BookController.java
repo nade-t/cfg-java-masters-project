@@ -32,10 +32,18 @@ public class BookController {
     }
 
     @PatchMapping("/{id}/purchase")
-    public ResponseEntity<Book> purchaseBook(@PathVariable Long id, @Valid @RequestBody int purchaseQuantity) {
+    public ResponseEntity<Book> purchaseBook(@PathVariable Long id, @Valid @RequestParam int purchaseQuantity) {
         log.info("Processing purchase for book id: {}, quantity: {}",
                 id, purchaseQuantity);
         Book bookPurchase = bookService.purchaseBook(id, purchaseQuantity);
         return ResponseEntity.ok(bookPurchase);
     }
+
+    @PatchMapping("/{id}/refund")
+    public ResponseEntity<Book> refundBook(@PathVariable Long id, @Valid @RequestParam int refundQuantity) {
+        log.info("Processed refund for book id: {}, quantity: {}", id, refundQuantity);
+        Book bookRefund = bookService.refundBook(id, refundQuantity);
+        return ResponseEntity.ok(bookRefund);
+    }
+
 }

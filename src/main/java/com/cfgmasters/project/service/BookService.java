@@ -79,6 +79,7 @@ public class BookService {
              */
             int availableCopies = book.getCopiesAvailable();
             book.setCopiesAvailable(availableCopies + refundQuantity);
+            log.info("Refund processed and stock levels of book id {} updated", id);
             Book updatedBookStock = bookRepository.save(book);
             return updatedBookStock;
 
