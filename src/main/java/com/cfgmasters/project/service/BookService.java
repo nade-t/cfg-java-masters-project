@@ -29,10 +29,10 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book sellBook(Long id, int salesQuantity) {
+    public Book purchaseBook(Long id, int purchaseQuantity) {
         try {
-            if (salesQuantity <= 0) {
-                throw new IllegalArgumentException("Sales quantity must be greater than 0");
+            if (purchaseQuantity <= 0) {
+                throw new IllegalArgumentException("Purchase quantity must be greater than 0");
             }
 
             Book book = bookRepository.findById(id)
@@ -40,15 +40,15 @@ public class BookService {
 
             int availableCopies = book.getCopiesAvailable();
 
-            if (salesQuantity > availableCopies) {
+            if (purchaseQuantity > availableCopies) {
                 throw new IllegalArgumentException("Not enough copies in stock. Number available for purchase: "
                         + availableCopies);
             }
 
-            book.setCopiesAvailable(availableCopies - salesQuantity);
+            book.setCopiesAvailable(availableCopies - purchaseQuantity);
             Book updatedBookStock = bookRepository.save(book);
 
-            log.info("{} copy(ies) of book id {} sold. Remaining stock: {}", salesQuantity, id,
+            log.info("{} copy(ies) of book id {} sold. Remaining stock: {}", purchaseQuantity, id,
                     updatedBookStock.getCopiesAvailable());
 
             return updatedBookStock;
