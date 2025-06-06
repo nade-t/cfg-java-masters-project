@@ -61,4 +61,33 @@ public class BookService {
             throw new RuntimeException("Unable to process purchase: " + e.getMessage());
         }
     }
+
+    public Book refundBook(Long id, int refundQuantity) {
+        try {
+            if (refundQuantity <= 0) {
+                throw new IllegalArgumentException("Refund quantity must be greater than 0");
+            }
+
+            Book book = bookRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Book with id: " + id + " not found in inventory"));
+
+            /*
+
+             * Refund method does not need to check for stock levels.
+             * Book items with a 0 copiesAvailable quantity will appear as "out of stock" and their stock levels
+             * are still accessible to process refunds.
+             */
+            int availableCopies = book.getCopiesAvailable();
+            book.setCopiesAvailable(availableCopies + refundQuantity);
+            Book updatedBookStock = bookRepository.save(book);
+            return updatedBookStock;
+
+        } catch (IllegalArgumentException e) {
+            log.error("Unable to process refund: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error("Unable to process refund: {}", e.getMessage());
+            throw new RuntimeException("Unable to process refund: " + e.getMessage());
+        }
+    }
 }
