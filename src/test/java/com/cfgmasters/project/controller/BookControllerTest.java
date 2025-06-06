@@ -42,7 +42,7 @@ class BookControllerTest {
         val request = post("/books").content(rawRequest).contentType(String.valueOf(MediaType.APPLICATION_JSON));
 
         val mockBook = new Book(1L, "The Psychology of Money", "Morgan Housel", BigDecimal.valueOf((10.99)), 8);
-        when(bookService.addbook(any(Book.class))).thenReturn(mockBook);
+        when(bookService.addBook(any(Book.class))).thenReturn(mockBook);
 
         mvc.perform(request).andExpect(status().isOk());
     }
