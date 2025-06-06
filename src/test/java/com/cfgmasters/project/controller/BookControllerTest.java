@@ -53,7 +53,7 @@ class BookControllerTest {
     void whenGetAllBooks_thenReturnsListOfBooks() throws Exception {
         List<Book> mockBooks = List.of(
                 new Book(1L, "Book One", "Test Author", BigDecimal.valueOf(12.99), 6),
-                new Book(1L, "Book One", "Test Author", BigDecimal.valueOf(12.99), 6)
+                new Book(2L, "Book Two", "Test Author Two", BigDecimal.valueOf(13.99), 2)
         );
         when(bookService.getAllBooks()).thenReturn(mockBooks);
 
