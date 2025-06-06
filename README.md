@@ -102,9 +102,9 @@ Controller -->|builds response| /books
 
 ## Open API Documentation
 
-Ensure the ProjectApplication is running and then access the url here: http://localhost:8080/swagger-ui/index.html
-Expand the endpoint dropdowns
-Click on the Try it out buttons and Execute
+1. Ensure the ProjectApplication is running and then access the url here: http://localhost:8080/swagger-ui/index.html
+2. Expand the endpoint dropdowns
+3. Click on the Try it out buttons and Execute
 
 ------
 
