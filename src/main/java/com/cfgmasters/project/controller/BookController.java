@@ -30,4 +30,12 @@ public class BookController {
         List<Book> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }
+
+    @PatchMapping("/{id}/purchase")
+    public ResponseEntity<Book> purchaseBook(@PathVariable Long id, @Valid @RequestBody int purchaseQuantity) {
+        log.info("Processing purchase for book id: {}, quantity: {}",
+                id, purchaseQuantity);
+        Book bookPurchase = bookService.sellBook(id, purchaseQuantity);
+        return ResponseEntity.ok(bookPurchase);
+    }
 }
