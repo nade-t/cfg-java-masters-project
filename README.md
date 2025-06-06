@@ -14,6 +14,7 @@ This project manages a bookstore's inventory and transactions, including purchas
 - Add a new book to the store
 - Delete a book from the store
 - Update a book's record
+- OpenAPI
 
 ------
 
@@ -101,7 +102,9 @@ Controller -->|builds response| /books
 
 ## Open API Documentation
 
-For full documentation visit: ( **add link to swagger ui!** )
+Ensure the ProjectApplication is running and then access the url here: http://localhost:8080/swagger-ui/index.html
+Expand the endpoint dropdowns
+Click on the Try it out buttons and Execute
 
 ------
 
