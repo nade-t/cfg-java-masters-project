@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class BookControllerTest {
     @Autowired
     private MockMvc mvc;
+
     @MockitoBean
     private BookService bookService;
 
