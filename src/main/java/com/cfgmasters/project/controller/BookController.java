@@ -21,7 +21,7 @@ public class BookController {
     @PostMapping
     public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
         log.info("Adding new book: {}", book);
-        return ResponseEntity.ok(bookService.addbook(book));
+        return ResponseEntity.ok(bookService.addBook(book));
     }
 
     @GetMapping
@@ -30,4 +30,20 @@ public class BookController {
         List<Book> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }
+
+    @PatchMapping("/{id}/purchase")
+    public ResponseEntity<Book> purchaseBook(@PathVariable Long id, @Valid @RequestParam int purchaseQuantity) {
+        log.info("Processing purchase for book id: {}, quantity: {}",
+                id, purchaseQuantity);
+        Book bookPurchase = bookService.purchaseBook(id, purchaseQuantity);
+        return ResponseEntity.ok(bookPurchase);
+    }
+
+    @PatchMapping("/{id}/refund")
+    public ResponseEntity<Book> refundBook(@PathVariable Long id, @Valid @RequestParam int refundQuantity) {
+        log.info("Processed refund for book id: {}, quantity: {}", id, refundQuantity);
+        Book bookRefund = bookService.refundBook(id, refundQuantity);
+        return ResponseEntity.ok(bookRefund);
+    }
+
 }
