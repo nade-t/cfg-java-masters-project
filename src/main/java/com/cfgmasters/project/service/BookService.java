@@ -14,7 +14,7 @@ import java.util.List;
 public class BookService {
     private final BookRepository bookRepository;
 
-    public Book addbook(Book book) {
+    public Book addBook(Book book) {
         try {
             Book bookSaved = bookRepository.save(book);
             log.info("Successfully added book: {}", bookSaved.getTitle());
