@@ -59,4 +59,24 @@ class BookControllerTest {
 
         mvc.perform(get("/books")).andExpect(status().isOk());
     }
+
+    //Testing book purchase with mock data
+    @Test
+    void whenPurchaseBookById_thenReturnUpdatedBook() throws Exception {
+        Long id = 1L;
+        int quantity = 2;
+
+        Book book = new Book();
+        book.setId(id);
+        book.setCopiesAvailable(6);
+
+        when(bookService.purchaseBook(id, quantity)).thenReturn(book);
+
+
+
+
+    }
+
+
+
 }
