@@ -11,14 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -60,23 +59,21 @@ class BookControllerTest {
         mvc.perform(get("/books")).andExpect(status().isOk());
     }
 
-    //Testing book purchase with mock data
+    //Testing a book purchase
     @Test
-    void whenPurchaseBookById_thenReturnUpdatedBook() throws Exception {
+    void whenPurchaseBookById_thenReturnsStatus200() throws Exception {
         Long id = 1L;
-        int quantity = 2;
+        int purchaseQuantity = 2;
 
         Book book = new Book();
         book.setId(id);
         book.setCopiesAvailable(6);
 
-        when(bookService.purchaseBook(id, quantity)).thenReturn(book);
+        when(bookService.purchaseBook(id, purchaseQuantity)).thenReturn(book);
 
-
-
-
+        mvc.perform(patch("/books/{id}/purchase", id).param("purchaseQuantity", String.valueOf(purchaseQuantity)))
+                    .andExpect(status().isOk());
     }
-
-
+    // Add in test for refund book
 
 }
