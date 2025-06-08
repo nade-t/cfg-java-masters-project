@@ -26,7 +26,16 @@ public class BookService {
     }
 
     public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+        try {
+            log.debug("Getting all stock");
+            return bookRepository.findAll()
+                    .stream()
+                    .filter(book -> book.getCopiesAvailable() > 0)
+                    .toList();
+        } catch (Exception e) {
+            log.error("Failed to retrieve records from Database", e);
+            return List.of();
+        }
     }
 
     public Book purchaseBook(Long id, int purchaseQuantity) {
