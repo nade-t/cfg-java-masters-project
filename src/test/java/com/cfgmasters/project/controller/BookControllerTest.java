@@ -74,6 +74,20 @@ class BookControllerTest {
         mvc.perform(patch("/books/{id}/purchase", id).param("purchaseQuantity", String.valueOf(purchaseQuantity)))
                     .andExpect(status().isOk());
     }
-    // Add in test for refund book
 
+    // Add in test for refund book
+    @Test
+    void whenRefundBookById_thenReturnsStatus200() throws Exception {
+        Long id = 1L;
+        int refundQuantity = 1;
+
+        Book book = new Book();
+        book.setId(id);
+        book.setCopiesAvailable(6);
+
+        when(bookService.refundBook(id, refundQuantity)).thenReturn(book);
+
+        mvc.perform(patch("/books/{id}/refund", id).param("refundQuantity", String.valueOf(refundQuantity)))
+                .andExpect(status().isOk());
+    }
 }
