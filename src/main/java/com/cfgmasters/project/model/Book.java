@@ -2,6 +2,7 @@ package com.cfgmasters.project.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Book {
     @Column(name = "author", length = 30, nullable = false)
     private String author;
 
+    @DecimalMin(value = "1.00", inclusive = true, message = ("Price must be £1 or more"))
     @Column(name = "price", precision = 4,scale = 2, nullable = false)
     private BigDecimal price;
 
