@@ -61,13 +61,30 @@ class BookControllerTest {
         val request = post("/books").content(rawRequest).contentType(MediaType.APPLICATION_JSON);
 
         val mockBook = new Book(1L, "The Psychology of Money", "Morgan Housel", BigDecimal.valueOf((0.99)), 8);
-        when(bookService.addBook(any(Book.class))).thenReturn(mockBook);
 
         mvc.perform(request).andExpect(status().isBadRequest());
     }
 
+    //Boundary Limit test, check if price accepted when at the minimum price
+    @Test
+    void whenAddingBookWithPriceAtBoundaryLimit_thenReturnStatusOk() throws Exception {
+        val rawRequest = """
+                {
+                    "title": "The Psychology of Money",
+                    "author": "Morgan Housel",
+                    "price": 1.00,
+                    "copiesAvailable": 8
+                }
+                """;
+        val request = post("/books").content(rawRequest).contentType(MediaType.APPLICATION_JSON);
 
-        //Checking if mock service returns list of books
+        val mockBook = new Book(1L, "The Psychology of Money", "Morgan Housel", BigDecimal.valueOf((1.00)), 8);
+        when(bookService.addBook(any(Book.class))).thenReturn(mockBook);
+
+        mvc.perform(request).andExpect(status().isOk());
+    }
+
+    //Checking if mock service returns list of books
     @Test
     void whenGetAllBooks_thenReturnsListOfBooks() throws Exception {
         List<Book> mockBooks = List.of(
@@ -92,7 +109,7 @@ class BookControllerTest {
         when(bookService.purchaseBook(id, purchaseQuantity)).thenReturn(book);
 
         mvc.perform(patch("/books/{id}/purchase", id).param("purchaseQuantity", String.valueOf(purchaseQuantity)))
-                    .andExpect(status().isOk());
+                .andExpect(status().isOk());
     }
 
     // Add in test for refund book
