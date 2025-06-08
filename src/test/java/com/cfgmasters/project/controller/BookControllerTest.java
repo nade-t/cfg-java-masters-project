@@ -47,7 +47,27 @@ class BookControllerTest {
         mvc.perform(request).andExpect(status().isOk());
     }
 
-    //Checking if mock service returns list of books
+    //Validation Test - price must be £1 or more
+    @Test
+    void whenAddingBookBelowPriceLimit_thenReturnBadRequest() throws Exception {
+        val rawRequest = """
+                {
+                    "title": "The Psychology of Money",
+                    "author": "Morgan Housel",
+                    "price": 0.99,
+                    "copiesAvailable": 8
+                }
+                """;
+        val request = post("/books").content(rawRequest).contentType(MediaType.APPLICATION_JSON);
+
+        val mockBook = new Book(1L, "The Psychology of Money", "Morgan Housel", BigDecimal.valueOf((0.99)), 8);
+        when(bookService.addBook(any(Book.class))).thenReturn(mockBook);
+
+        mvc.perform(request).andExpect(status().isBadRequest());
+    }
+
+
+        //Checking if mock service returns list of books
     @Test
     void whenGetAllBooks_thenReturnsListOfBooks() throws Exception {
         List<Book> mockBooks = List.of(
