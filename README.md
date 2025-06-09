@@ -1,9 +1,10 @@
 # CFG Java Masters Project
+
 Group project for the CFG Java Masters
 
 ## Project Description
 
-A backend application built with Java and Spring Boot that uses REST APIs and a MySQL database. 
+A backend application built with Java and Spring Boot that uses REST APIs and a MySQL database.
 This project manages a bookstore's inventory and transactions, including purchases.
 
 ------
@@ -19,6 +20,7 @@ This project manages a bookstore's inventory and transactions, including purchas
 ------
 
 ## Software Requirements
+
 To run this project you will need:
 
 - **Java 21 or higher, Spring Boot**
@@ -47,16 +49,14 @@ cd cfg-java-masters-project
 
 The app is configured using application.yml
 
-1. Locate the `application.yml.example` in the resources directory. 
+1. Locate the `application.yml.example` in the resources directory.
 2. Replace credentials with your own username and MySQL password
-
 
 ## Database Setup
 
 Create your MySQL database and table using the .sql script included in the project:
 
 - Location: `src/main/resources/database.sql`
-
 
 ## Run the Application
 
@@ -69,34 +69,32 @@ Create your MySQL database and table using the .sql script included in the proje
 
 ## API Endpoints
 
-| Method | Endpoint | Description         |
-|--------|--------|---------------------|
-| GET    | /books | Retrieves all books |
-| POST   | /books | Adds a new book     |
-| PUT    | /****** | Updates a book      |
-| Delete | /****** | Deletes a new book  |
-
+| Method | Endpoint       | Description                    |
+|--------|----------------|--------------------------------|
+| GET    | /books         | Retrieves all books            |
+| POST   | /books         | Adds a new book                |
+| PATCH  | /{id}/purchase | Carries out purchase operation |
+| PATCH  | /{id}/refund   | Refunds a purchase             |
 
 ------
 
 ## Architecture Overview
+
 - Controllers handle HTTP requests
 - Services contain business logic
 - Repositories handle DB interactions
 
-
 ```mermaid
 flowchart TD
-User -->|sends GET request| /books
-/books -->|mapped by| Controller
-Controller -->|calls| Repository
-Repository -->|queries| DB
-DB -->|returns data| Repository
-Repository --> Controller
-Controller -->|builds response| /books
-/books -->|returns to| User
+    User -->|sends GET request| /books
+    /books -->|mapped by| Controller
+    Controller -->|calls| Repository
+    Repository -->|queries| DB
+    DB -->|returns data| Repository
+    Repository --> Controller
+    Controller -->|builds response| /books
+    /books -->|returns to| User
 ```
-
 
 ------
 
@@ -109,7 +107,8 @@ Controller -->|builds response| /books
 ------
 
 ### Authors
-- Violeta  
-- Nade 
-- Jessie  
+
+- Violeta
+- Nade
+- Jessie
 - Radhika  
