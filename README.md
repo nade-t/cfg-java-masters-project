@@ -13,8 +13,8 @@ This project manages a bookstore's inventory and transactions, including purchas
 
 - View all books in the Book Store
 - Add a new book to the store
-- Delete a book from the store
-- Update a book's record
+- Purchase a book
+- Refund a book
 - OpenAPI
 
 ------
