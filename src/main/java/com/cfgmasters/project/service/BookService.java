@@ -1,5 +1,6 @@
 package com.cfgmasters.project.service;
 
+import com.cfgmasters.project.exception.BookNotFoundException;
 import com.cfgmasters.project.model.Book;
 import com.cfgmasters.project.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +46,7 @@ public class BookService {
             }
 
             Book book = bookRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Book with id: " + id + " not found"));
+                    .orElseThrow(() -> new BookNotFoundException(id));
 
             int availableCopies = book.getCopiesAvailable();
 
@@ -78,7 +79,7 @@ public class BookService {
             }
 
             Book book = bookRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Book with id: " + id + " not found in inventory"));
+                    .orElseThrow(() -> new BookNotFoundException(id));
 
             /*
 
