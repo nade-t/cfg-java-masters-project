@@ -69,12 +69,12 @@ Create your MySQL database and table using the .sql script included in the proje
 
 ## API Endpoints
 
-| Method | Endpoint       | Description                    |
-|--------|----------------|--------------------------------|
-| GET    | /books         | Retrieves all books            |
-| POST   | /books         | Adds a new book                |
-| PATCH  | /{id}/purchase | Carries out purchase operation |
-| PATCH  | /{id}/refund   | Refunds a purchase             |
+| Method | Endpoint            | Description                    |
+|--------|---------------------|--------------------------------|
+| GET    | /books              | Retrieves all books            |
+| POST   | /books              | Adds a new book                |
+| PATCH  | books/{id}/purchase | Carries out purchase operation |
+| PATCH  | books/{id}/refund   | Refunds a purchase             |
 
 ------
 
