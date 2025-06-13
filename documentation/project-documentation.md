@@ -20,10 +20,10 @@
 ### Technical:
 
 - RESTful API endpoints to:
-    - `POST/ add_book`
-    - `GET/ books`
-    - `PATCH/ purchase_book`
-    - `PATCH/ refund book`
+    - `POST/ add books`
+    - `GET/ retrieve books`
+    - `PATCH/ purchase books`
+    - `PATCH/ refund books`
 - Relational database to persist book and transaction data
 
 ### Nontechnical:
