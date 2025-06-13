@@ -97,7 +97,33 @@ flowchart TD
     Controller -->|builds response| /books
     /books -->|returns to| User
 ```
+------
 
+## Docker Deployment
+This project includes Docker support for running the backend and MySQL as containers.
+
+### Prerequisites
+
+- Docker installed
+- Docker Compose installed
+
+### Steps to Run
+
+1. From the project root directory, build the Docker image:
+```bash
+docker build -t cfg-java-masters-project
+```
+2. Run the application and database using Docker Compose:
+```bash
+docker-compose up
+```
+This will start:
+- The Spring Boot application (on port 8080)
+- A MySQL database container (on port 3306)
+
+#### Files Included
+- Dockerfile – Builds the Java Spring Boot application image.
+- docker-compose.yml – Defines services and network for app and MySQL.
 ------
 
 ## Open API Documentation
