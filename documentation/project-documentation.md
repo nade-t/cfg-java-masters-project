@@ -89,4 +89,44 @@ Watch the full demo of all REST API endpoints being tested using **Insomnia**
 2. Expand the endpoint dropdowns
 3. Click on the Try it out buttons and Execute
 
-##
+# Deployment Instructions
+- Docker Setup This project includes Docker-based deployment. 
+- Below are the steps to build and run the application using Docker:
+
+## Prerequisites
+- Docker installed
+- Docker Compose installed
+
+## Build the Docker Image
+bash
+```
+docker build -t cfg-java-masters-project
+```
+
+Run with Docker Compose:
+```
+docker-compose up
+```
+
+## Files Included
+- Dockerfile: Builds the Spring Boot application. 
+- docker-compose.yml: Defines services for the app and MySQL. 
+
+### Deployment Pipeline (Proposal)
+Outlines stages from code development to deployment.
+
+1. Commit all code - push all updated code to GitHub
+2. Automated Build - compile and build
+```mvn clean install```
+3. Run Automated Tests 
+```./mvnw test```
+4. Docker Image Build
+```
+docker build -t cfg-java-masters-project .
+```
+5. Docker Compose 
+```
+docker-compose up
+```
+6. Manually Verify Endpoints - Insomnia on local machine or Postman 
+7. CI/CD Integration - Integrate with tools like Github Actions / Jenkins
