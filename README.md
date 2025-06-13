@@ -69,12 +69,12 @@ Create your MySQL database and table using the .sql script included in the proje
 
 ## API Endpoints
 
-| Method | Endpoint            | Description                    |
-|--------|---------------------|--------------------------------|
-| GET    | /books              | Retrieves all books            |
-| POST   | /books              | Adds a new book                |
-| PATCH  | books/{id}/purchase | Carries out purchase operation |
-| PATCH  | books/{id}/refund   | Refunds a purchase             |
+| Method | Endpoint             | Description                    |
+|--------|----------------------|--------------------------------|
+| GET    | /books               | Retrieves all books            |
+| POST   | /books               | Adds a new book                |
+| PATCH  | /books/{id}/purchase | Carries out purchase operation |
+| PATCH  | /books/{id}/refund   | Refunds a purchase             |
 
 ------
 
@@ -88,10 +88,12 @@ Create your MySQL database and table using the .sql script included in the proje
 flowchart TD
     User -->|sends GET request| /books
     /books -->|mapped by| Controller
-    Controller -->|calls| Repository
+    Controller -->|calls| Service
+    Service -->|calls| Repository
     Repository -->|queries| DB
     DB -->|returns data| Repository
-    Repository --> Controller
+    Repository -->|returns data| Service
+    Service -->|returns data| Controller
     Controller -->|builds response| /books
     /books -->|returns to| User
 ```

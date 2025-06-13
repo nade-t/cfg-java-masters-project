@@ -36,6 +36,7 @@
 - Architecture diagram (Controller → Service → Repository)
 - Design pattern: Model-View-Controller (MVC)
 - How endpoints interact with database and other components.
+
   ![Diagram of class architecture](class-diagram.jpg)
 
 ## Tools and Libraries:
@@ -53,7 +54,8 @@
 
 - Use JUnit and Mockito to test services and controllers in isolation
 - Mock external dependencies (e.g., repositories)
-- SpringBootTest? MockMvc?
+- SpringBootTest
+- MockMvc
 
 ## Functional Testing
 
@@ -68,9 +70,11 @@
 
 ## Manual Test Plan
 
-| Test Case          | Endpoint                             | Description                               | Input Example                                                                         | Expected Outcome                                         |
-|--------------------|--------------------------------------|-------------------------------------------|---------------------------------------------------------------------------------------|----------------------------------------------------------|
-| 1. Add a Book      | `POST /books`                        | Add a new book to inventory               | `{ "title": "Test Book", "author": "Jane Doe", "price": 9.99, "copiesAvailable": 5 }` | 201 Created; book appears in database with correct stock |
-| 2. Get All Books   | `GET /books`                         | Retrieve list of all available books      | _None_                                                                                | 200 OK: JSON array including the newly added book        |
-| 3. Purchase a Book | `POST /books/purchase(ADD ENDPOINT)) | Simulate a book purchase (stock decrease) | Query params: `bookId=1`, `quantity=2`                                                | 200 OK: `copies_available` reduced number                |
-
+| Test Case                         | Endpoint                                                        | Description                                                  | Input Example                                                                                                                                      | Expected Outcome                                           |
+|----------------------------------|------------------------------------------------------------------|--------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
+| 1. Add a Valid Book              | `POST /books`                                                   | Add a new valid book to the store                            | `{ "title": "The Psychology of Money", "author": "Morgan Housel", "price": 10.99, "copiesAvailable": 8 }`                                          | 200 OK - Book is added                                    |
+| 2. Add Book Below Price Limit    | `POST /books`                                                   | Try to add a book priced below the minimum limit (£1)        | `{ "title": "The Psychology of Money", "author": "Morgan Housel", "price": 0.99, "copiesAvailable": 8 }`                                           | 400 Bad Request                                           |
+| 3. Add Book at Price Boundary    | `POST /books`                                                   | Add a book priced exactly at the boundary limit (£1)         | `{ "title": "The Psychology of Money", "author": "Morgan Housel", "price": 1.00, "copiesAvailable": 8 }`                                           | 200 OK - Book is added                                    |
+| 4. Get All Books                 | `GET /books`                                                    | Retrieve a list of all available books                       | _None_                                                                                                                                             | 200 OK - JSON array of books                              |
+| 5. Purchase a Book               | `PATCH /books/{id}/purchase?purchaseQuantity={quantity}`       | Simulate a book purchase (reduces stock count)               | Path: `/books/1/purchase`, Query: `purchaseQuantity=2`                                                                                             | 200 OK - Book copies reduced                              |
+| 6. Refund a Book                 | `PATCH /books/{id}/refund?refundQuantity={quantity}`           | Simulate a book refund (increases stock count)               | Path: `/books/1/refund`, Query: `refundQuantity=1`                                                                                                 | 200 OK - Book copies increased           
