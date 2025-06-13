@@ -82,7 +82,7 @@
 
 ## Demo of Endpoints
 Watch the full demo of all REST API endpoints being tested using **Insomnia**
-[Watch the video](documentation/endpoints-insomnia.mp4)
+[Watch the video](https://drive.google.com/file/d/12qgTvOlKhkCCLqCIJDwvyWWrrhznU09Q/view?usp=drive_link)
 
 ## OpenAPI
 1. Ensure the ProjectApplication is running and then access the url here: http://localhost:8080/swagger-ui/index.html
