@@ -20,10 +20,10 @@
 ### Technical:
 
 - RESTful API endpoints to:
-    - `POST/ add_book`
-    - `GET/ books`
-    - `POST/ purchase_book`
-    - `POST/ return_book (refund)`
+    - `POST/ add books`
+    - `GET/ retrieve books`
+    - `PATCH/ purchase books`
+    - `PATCH/ refund books`
 - Relational database to persist book and transaction data
 
 ### Nontechnical:
@@ -67,6 +67,7 @@
 
 - Attempt to purchase out-of-stock books
 - Attempt refunds for invalid transactions
+- Attempt adding a book priced at boundary value
 
 ## Manual Test Plan
 
@@ -78,3 +79,54 @@
 | 4. Get All Books                 | `GET /books`                                                    | Retrieve a list of all available books                       | _None_                                                                                                                                             | 200 OK - JSON array of books                              |
 | 5. Purchase a Book               | `PATCH /books/{id}/purchase?purchaseQuantity={quantity}`       | Simulate a book purchase (reduces stock count)               | Path: `/books/1/purchase`, Query: `purchaseQuantity=2`                                                                                             | 200 OK - Book copies reduced                              |
 | 6. Refund a Book                 | `PATCH /books/{id}/refund?refundQuantity={quantity}`           | Simulate a book refund (increases stock count)               | Path: `/books/1/refund`, Query: `refundQuantity=1`                                                                                                 | 200 OK - Book copies increased           
+
+## Demo of Endpoints
+Watch the full demo of all REST API endpoints being tested using **Insomnia**
+[Watch the video](https://drive.google.com/file/d/12qgTvOlKhkCCLqCIJDwvyWWrrhznU09Q/view?usp=drive_link)
+
+## OpenAPI
+1. Ensure the ProjectApplication is running and then access the url here: http://localhost:8080/swagger-ui/index.html
+2. Expand the endpoint dropdowns
+3. Click on the Try it out buttons and Execute
+
+# Deployment Instructions
+- Docker Setup This project includes Docker-based deployment. 
+- Below are the steps to build and run the application using Docker:
+
+## Prerequisites
+- Docker installed
+- Docker Compose installed
+
+## Build the Docker Image
+bash
+```
+docker build -t cfg-java-masters-project
+```
+
+Run with Docker Compose:
+```
+docker-compose up
+```
+
+## Files Included
+- Dockerfile: Builds the Spring Boot application. 
+- docker-compose.yml: Defines services for the app and MySQL. 
+
+### Deployment Pipeline (Proposal)
+Outlines stages from code development to deployment.
+
+1. Commit all code - push all updated code to GitHub
+2. Automated Build - compile and build
+```mvn clean install```
+3. Run Automated Tests 
+```./mvnw test```
+4. Docker Image Build
+```
+docker build -t cfg-java-masters-project .
+```
+5. Docker Compose 
+```
+docker-compose up
+```
+6. Manually Verify Endpoints - Insomnia on local machine or Postman 
+7. CI/CD Integration - Integrate with tools like Github Actions / Jenkins
