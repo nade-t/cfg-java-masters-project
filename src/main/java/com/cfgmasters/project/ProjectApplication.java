@@ -1,6 +1,5 @@
 package com.cfgmasters.project;
 
-import com.cfgmasters.project.model.Menu;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

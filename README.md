@@ -58,6 +58,8 @@ Create your MySQL database and table using the .sql script included in the proje
 
 - Location: `src/main/resources/database.sql`
 
+If you'd like to populate the database with mock data for testing, use `src/main/resources/database-mock-data.sql`.
+
 ## Run the Application
 
 1. Make sure MySQL is running

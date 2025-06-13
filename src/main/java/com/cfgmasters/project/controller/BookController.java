@@ -41,7 +41,7 @@ public class BookController {
 
     @PatchMapping("/{id}/refund")
     public ResponseEntity<Book> refundBook(@PathVariable Long id, @Valid @RequestParam int refundQuantity) {
-        log.info("Processed refund for book id: {}, quantity: {}", id, refundQuantity);
+        log.info("Processing refund for book id: {}, quantity: {}", id, refundQuantity);
         Book bookRefund = bookService.refundBook(id, refundQuantity);
         return ResponseEntity.ok(bookRefund);
     }
