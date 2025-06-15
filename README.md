@@ -99,9 +99,11 @@ flowchart TD
     Controller -->|builds response| /books
     /books -->|returns to| User
 ```
+
 ------
 
 ## Docker Deployment
+
 This project includes Docker support for running the backend and MySQL as containers.
 
 ### Prerequisites
@@ -112,20 +114,27 @@ This project includes Docker support for running the backend and MySQL as contai
 ### Steps to Run
 
 1. From the project root directory, build the Docker image:
+
 ```bash
 docker build -t cfg-java-masters-project
 ```
+
 2. Run the application and database using Docker Compose:
+
 ```bash
 docker-compose up
 ```
+
 This will start:
+
 - The Spring Boot application (on port 8080)
 - A MySQL database container (on port 3306)
 
 #### Files Included
+
 - Dockerfile – Builds the Java Spring Boot application image.
 - docker-compose.yml – Defines services and network for app and MySQL.
+
 ------
 
 ## Open API Documentation
@@ -133,6 +142,20 @@ This will start:
 1. Ensure the ProjectApplication is running and then access the url here: http://localhost:8080/swagger-ui/index.html
 2. Expand the endpoint dropdowns
 3. Click on the Try it out buttons and Execute
+
+------
+
+## Running the test suite
+
+If you want to run all tests using the command line prompt `mvn test` you will need to install the
+[Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/). This has not been included
+within the project and will need to be installed separately.
+
+To run the tests without the plugin, you will need to have the project open in your IDE. Then the tests can be run by
+right-clicking and selecting `run` on:
+
+- `BookControllerTest` - located in `src/test/java/controller/BookControllerTest`
+- `BookServiceTest` - located in `src/test/java/service/BookServiceTest`
 
 ------
 
